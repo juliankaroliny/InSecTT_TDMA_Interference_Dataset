@@ -6,40 +6,44 @@ This enables the possibility to measure the distributed interference for every n
 # Measurement Procedure
 
 ## Hardware and Protocol
-Measurements in this dataset are conducted with  the  Energy  and  Power  Efficient  Synchronous  SensorNetwork (EPhESOS) protocol [1]. EPhESOS is a Time Division Multiple Access (TDMA) network protocol for industrial application, where every node within the network gets a dedicated timesot where it is allowed to transmit data. The beacon of the network and the possible timeslots are collected in a so-called superframe that is repeated continously.  The following figure depicts the superframe format of the EPhESOS protocol.
-
+Measurements in this dataset are conducted with the Energy and Power  Efficient  Synchronous  SensorNetwork (EPhESOS) protocol [1]. EPhESOS is a Time Division Multiple Access (TDMA) network protocol for industrial applications, where every node within the network gets a dedicated timeslot where it is allowed to transmit data. The beacon of the network and the possible timeslots are collected in a so-called superframe that is repeated continuously.  The following figure depicts the superframe format of the EPhESOS protocol.
+<p align="center">
 <img src="Images/ephesos_frame.png" height="50%" width="50%" >
+</p>
 
 
-As hardware platform, the Nordic™ NRF52840 controller with integrated transceiver used. For the communication in the WSN the EPhESOS protocol is combined with the Bluetooth Low Energy (BLE) physical (PHY) layer. 
 
-<img src="Images/hardware.png" height="30%" width="30%" >
+As hardware platform, the Nordic™ NRF52840 controller with integrated transceiver was used. For the communication in the WSN the EPhESOS protocol is combined with the Bluetooth Low Energy (BLE) physical (PHY) layer. 
+<p align="center">
+<img src="Images/hardware.png" height="25%" width="25%" >
+</p>
 
-The measurements itself are conducted by  sniffer  nodes,  which  report  the average  signal  level  of  each  timeslot  to  the  network  coordinator, where all data is collected. The average signal level of the timeslots is measured using energy detection, a feature in 802.15.4 and available in  many  commercial  transceiver  controller  like  the  NRF52840.  It allows  an  automatic  averaging  of  the  signal  level  of  the  current channel for a duration of 128 μs, which is used to measure the signal level within all timeslots of the superframes.
+
+The measurements themselves are conducted by sniffer nodes,  which report the average signal level of each timeslot to the network coordinator, where all data is collected. The average signal level of the timeslots is measured using energy detection, a feature in 802.15.4, and available in many commercial transceiver controllers like the  NRF52840.  It allows an automatic averaging of the signal level of the current channel for a duration of 128 μs, which is used to measure the signal level within all timeslots of the superframes.
 
 
 
 ## Schematic Interference Detection
 
+Sensor nodes that belong to the same TDMA-WSN have a dedicated timeslot, where they are allowed to transmit data to the network coordinator. Therefore these nodes will try to transmit with the same period as the superframe, though of course they are not required to transmit in every superframe. Interference from other devices and other network protocols can appear at any timeslot, however, if the communication of this device is somehow periodic, a certain pattern can be observed if multiple superframes are considered.
+The figure in the following depicts the measurement of a sniffer node for four superframes. The interferer sends periodically, but with a slightly higher period compared to the superframe. As a result, the interference will occur in each superframe a little bit later. The resulting pattern can be seen on the right.
 
+<p align="center">
 <img src="Images/meas_idea.gif" height="100%" width="100%" >
-
+</p>
 
 
 
 # Example Measurement
+The following figure shows one example measurement of this dataset. The x-Axis represents the timeslot number (in our case 100 timeslots per superframe) and the y-Axis represents the superframes, i.e. the subsequent measurements. If in a timeslot the measured signal level is above a −90 dBm threshold, it is marked black, otherwise it is left empty.  In the dataset also the corresponding RSSI values are available, though not depicted here for easier understanding. 
 
-To  demonstrate  the  interference  measurement  and  visualize  the patterns of periodic interference, experiments with the following setupare  conducted.  In this measurement two interferer are placed nearby which transmit at a period of 102.4 ms and 92.4 ms,respectively. The following figure  depicts  the measurement,  showing  the interference  of  the  timeslots  over  100  superframes.
+In this measurement two interferer are placed nearby which transmit at a period of 102.4 ms and 92.4 ms,respectively. The following figure  depicts  the measurement,  showing  the interference  of  the  timeslots  over  100  superframes.
 
+<p align="center">
 <img src="Images/example_meas_raw.png" height="70%" width="70%" >
+</p>
 
- If in a timeslot the measured signal level is above a −90 dBm threshold, it  is marked  black,  otherwise  it  is  left  empty.  In the dataset also the corresponding RSSI values are available, though not depicted here for easier understandn.  
- 
 The  first  interference  with  the  102.4 ms  period  is larger compared to the 100 ms superframe duration, therefore the  interference  is  observed  in  each  subsequent  superframe  shifted to the right, resulting in the lines moving to the right in the Figure. The second interference with 92.4 ms has a lower period, i.e., the resulting interference is every superframe several timeslots earlier. This pattern is  hard  to  distinguish  from  the  additional  noise  and  random  access of the real measurement.
-
-
-
-
 
 # Dataset
 
