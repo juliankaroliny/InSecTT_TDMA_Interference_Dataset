@@ -47,6 +47,28 @@ The  first  interference  with  the  102.4 ms  period  is larger compared to the
 
 # Dataset
 
+## Structure of Dataset
+Each subfolder in the [dataset](Dataset) folder represents one measurement set for a certain scenario. Each of these sets contains a [description.json](Dataset/test_set/description.json) with the important parameter of the measurement, the corresponding manufacturer ID of the sniffer nodes, and the timeslot they are operating. Additionally, there is a "measurement_setup" field that contains a description of the setup and peculiarity of this measurement set.
+
+The actual measurement of the sniffer nodes can be found in the [snifferX.csv](Dataset/test_set/sniffer1.csv) that contains the RSSI values of each TDMA-timeslot for each measured superframe. If for certain superframes and/or timeslots measurements are not available the specific fields are left empty.
+
+## Open the Dataset
+The dataset real measurement data is provided as a CSV file which allows opening the data in various programming languages and programs. For Python we shall give a small code example to open the sniffer measurement with Pandas and convert the superframe number and the measurements itself to NumPy arrays for further evaluation:
+
+
+```python
+#import needed packages
+import pandas as pd
+import numpy as np
+
+#load dataframe ( make sure to use ',' as separator and "SF" as index)
+df=pd.read_csv("test_set/sniffer1.csv", sep=',' , index_col = "SF")
+
+#get 1D-array of superframe numbers
+superframe_number = df.index.to_numpy()
+#get 2D-array of sniffer values (RSSI for each superframe and timeslot)
+sniffer_measurement = df.to_numpy()    
+```
 
 # Literature
 

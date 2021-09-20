@@ -1,0 +1,12 @@
+{
+    "SN_ID": [
+        "55418d5ac55a5c44"
+    ],
+    "SN_TS": [
+        1
+    ],
+    "num_TS": 100,
+    "t_TS": 0.0009,
+    "t_SF": 0.1,
+    "measurement_setup": "This field shall contain a description of the measurement setup and peculiarity of this set."
+}
