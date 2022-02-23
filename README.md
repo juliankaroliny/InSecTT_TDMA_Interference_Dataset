@@ -61,14 +61,25 @@ The dataset real measurement data is provided as a CSV file which allows opening
 import pandas as pd
 import numpy as np
 
-#load dataframe ( make sure to use ',' as separator and "SF" as index)
-df=pd.read_csv("test_set/sniffer1.csv", sep=',' , index_col = "SF")
+#load dataframe (make sure to use ',' as separator and "SF" as index)
+df = pd.read_csv("test_set/sniffer1.csv", sep=',' , index_col = "SF")
 
 #get 1D-array of superframe numbers
 superframe_number = df.index.to_numpy()
 #get 2D-array of sniffer values (RSSI for each superframe and timeslot)
 sniffer_measurement = df.to_numpy()    
 ```
+
+# Contact
+If you have any comments, questions or feedback please contact
+- Julian Karoliny: julian.karoliny@silicon-austria.com
+
+# License 
+This dataset is distributed under the [Creative Commons Attributions License 4.0 (CC-BY 4.0)](https://creativecommons.org/licenses/by/4.0/).
+
+
+# Acknowledgement
+This work is funded by the InSecTT project (https://www.insectt.eu/). InSecTT has received funding from the ECSEL Joint Undertaking (JU) under grant agreement No 876038. The JU receives support from the European Union’s Horizon 2020 research and innovation programme and Austria, Sweden, Spain, Italy, France, Portugal, Ireland, Finland, Slovenia, Poland, Netherlands, Turkey. The document reflects only the author’s view and the Commission is not responsible for any use that may be made of the information it contains.
 
 # Literature
 
