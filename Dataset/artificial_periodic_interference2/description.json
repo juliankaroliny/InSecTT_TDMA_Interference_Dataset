@@ -10,5 +10,5 @@
     "num_TS": 100,
     "t_TS": 0.0009,
     "t_SF": 0.1,
-    "measurement_setup": "Measurement with two sniffer and two artificial periodic interferer (one with 102.4 ms and one with xxx ms period). Sniffer and interferer are placed in close proximity, i.e. both sniffer will have similar results but additionally measure the data transmission of each other. Interference is activated one after another."
+    "measurement_setup": "Measurement with two sniffer nodes and two artificial periodic interferers (one with 102.4 ms and one with 94.4 ms period). Sniffing is performed on Bluetooth Low Energy physical layer channel 22. Sniffer and interferer are placed in close proximity, i.e. both sniffers will have similar results but additionally measure the transmit signal of each other. Interference is activated one after another."
 }

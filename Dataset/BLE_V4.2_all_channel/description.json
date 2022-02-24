@@ -1,0 +1,14 @@
+{
+    "SN_ID": [
+        "55418d5ac55a5c44",
+        "e5e46a4cf5d7ad30"
+    ],
+    "SN_TS": [
+        1,
+        3
+    ],
+    "num_TS": 100,
+    "t_TS": 0.0009,
+    "t_SF": 0.1,
+    "measurement_setup": "Measurement with two sniffer nodes and two Bluetooth Low Energy (BLE) devices communicating in connection state in close proximity. Sniffing is performed on BLE channel 22. One BLE device is using Version 4.2 so Channel Selection Algorithm #1 is used for the channel hopping. BLE configuration: connection interval 7.5 ms, all channels used"
+}
