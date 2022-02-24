@@ -1,32 +1,36 @@
 
-# TMDA Interference Dataset
+# InSecTT TMDA Interference Dataset
 
-This dataset provides interference measurements with Wireless Sensor Networks (WSN) on Time Division Multiple Access (TDMA) timeslot level on low-cost hardware. The sniffer nodes run on a TDMA based protocol with a superframe duration of 100 ms and 100 timeslots 0.9 ms each. The average signal level of each timeslot is measured directly on the sensor nodes and is reported to the network  coordinator. 
-This enables the possibility to measure the distributed interference for every node in the WSN in time and amplitude. The additional time aspect will allow identifying certain patterns in the interference.
+This dataset provides interference measurements with a wireless sensor network (WSN) based on a time division multiple access (TDMA) protocol running on low-cost hardware. The WSN consists of a network coordinator and several measurement nodes, where each device is allowed to transmit at a certain timeslot. For the interference measurements, special measurement nodes are introduced, that measure the average signal level of all possible timeslots and send the data to the network coordinator. This provides a somehow continuous measurement of the signal level in the channel. Since only the average signal level is considered, the channel access of different communication protocols can be evaluated. Furthermore, if a device shows deterministic access to the channel, e.g. periodic access, certain patterns can be observed in the measurements. These patterns can be used to identify the source and apply countermeasures for the WSN.
+
+This dataset is a work from [Silicon Austria Labs GmbH](https://silicon-austria-labs.com/) (SAL) and [Johannes Keppler University](https://www.jku.at/en) (JKU) in Linz for the [InSecTT project](https://www.insectt.eu/).
+
 # Measurement Procedure
 
 ## Hardware and Protocol
-Measurements in this dataset are conducted with the Energy and Power  Efficient  Synchronous  SensorNetwork (EPhESOS) protocol [1]. EPhESOS is a Time Division Multiple Access (TDMA) network protocol for industrial applications, where every node within the network gets a dedicated timeslot where it is allowed to transmit data. The beacon of the network and the possible timeslots are collected in a so-called superframe that is repeated continuously.  The following figure depicts the superframe format of the EPhESOS protocol.
+Measurements in this dataset are conducted with the Energy and Power  Efficient  Synchronous  Sensor Network (EPhESOS) protocol [1]. EPhESOS is a TDMA network protocol for industrial applications, where every node within the network gets a dedicated timeslot where it is allowed to transmit data. The beacon of the network coordinator and the possible timeslots are collected in a so-called superframe that is repeated continuously.  The following figure depicts the superframe format of the EPhESOS protocol.
 <p align="center">
 <img src="Images/ephesos_frame.png" height="50%" width="50%" >
 </p>
+For the measurements in this dataset a superframe duration of 100 ms with 100 timeslots 0.9 ms each was choosen. 
 
 
-
-As hardware platform, the Nordic™ NRF52840 controller with integrated transceiver was used. For the communication in the WSN the EPhESOS protocol is combined with the Bluetooth Low Energy (BLE) physical (PHY) layer. 
+As a hardware platform, the Nordic™ NRF52840 controller with integrated transceiver was used. For the communication in the WSN, the EPhESOS protocol is combined with the Bluetooth Low Energy (BLE) physical layer. 
 <p align="center">
 <img src="Images/hardware.png" height="25%" width="25%" >
 </p>
 
 
-The measurements themselves are conducted by sniffer nodes,  which report the average signal level of each timeslot to the network coordinator, where all data is collected. The average signal level of the timeslots is measured using energy detection, a feature in 802.15.4, and available in many commercial transceiver controllers like the  NRF52840.  It allows an automatic averaging of the signal level of the current channel for a duration of 128 μs, which is used to measure the signal level within all timeslots of the superframes.
+The measurements themselves are conducted by sniffer nodes,  which report the average signal level of each timeslot to the network coordinator. The average signal level of the timeslots is measured using energy detection, a feature in 802.15.4, and available in many commercial transceiver controllers like the  NRF52840. It allows an automatic averaging of the signal level in the current channel for a duration of 128 μs, which is used to measure the signal level within all timeslots in the superframes. 
 
 
 
-## Schematic Interference Detection
+## Schematic of the Interference Detection
 
-Sensor nodes that belong to the same TDMA-WSN have a dedicated timeslot, where they are allowed to transmit data to the network coordinator. Therefore these nodes will try to transmit with the same period as the superframe, though of course they are not required to transmit in every superframe. Interference from other devices and other network protocols can appear at any timeslot, however, if the communication of this device is somehow periodic, a certain pattern can be observed if multiple superframes are considered.
-The figure in the following depicts the measurement of a sniffer node for four superframes. The interferer sends periodically, but with a slightly higher period compared to the superframe. As a result, the interference will occur in each superframe a little bit later. The resulting pattern can be seen on the right.
+Sensor nodes that belong to the same TDMA-WSN have a dedicated timeslot, where they are allowed to transmit data. Devices that are not part of the network do not follow the TDMA structure. Interference from these devices can appear at any timeslot, however, if the communication of these devices is somehow periodic, a certain pattern can be observed if multiple superframes are considered.
+The figure in the following depicts the measurement of a sniffer node for four superframes. The interferer sends periodically, but with a slightly higher period compared to the superframe duration. As a result, the observation of the interference
+shifts to a later timeslot (i.e. higher timeslot number) with
+every new superframe. The resulting pattern can be seen on the right.
 
 <p align="center">
 <img src="Images/meas_idea.gif" height="100%" width="100%" >
@@ -35,25 +39,25 @@ The figure in the following depicts the measurement of a sniffer node for four s
 
 
 # Example Measurement
-The following figure shows one example measurement of this dataset. The x-Axis represents the timeslot number (in our case 100 timeslots per superframe) and the y-Axis represents the superframes, i.e. the subsequent measurements. If in a timeslot the measured signal level is above a −90 dBm threshold, it is marked black, otherwise it is left empty.  In the dataset also the corresponding RSSI values are available, though not depicted here for easier understanding. 
+The following figure shows one example measurement of this dataset. The x-Axis represents the timeslot number (in our case 100 timeslots per superframe) and the y-Axis represents the superframes, i.e. the subsequent measurements (100 ms superframe duration). If in a timeslot the measured signal level is above a −90 dBm threshold, it is marked black, otherwise, it is left empty.  In the dataset also the corresponding RSSI values are available, though not depicted here for easier understanding. 
 
-In this measurement two interferer are placed nearby which transmit at a period of 102.4 ms and 92.4 ms,respectively. The following figure  depicts  the measurement,  showing  the interference  of  the  timeslots  over  100  superframes.
+In this measurement, two interferers are placed nearby which transmit at a period of 102.4 ms and 92.4 ms, respectively. The following figure depicts the measurement,  showing the interference of the timeslots over 100 superframes.
 
 <p align="center">
 <img src="Images/example_meas_raw.png" height="70%" width="70%" >
 </p>
 
-The  first  interference  with  the  102.4 ms  period  is larger compared to the 100 ms superframe duration, therefore the  interference  is  observed  in  each  subsequent  superframe  shifted to the right, resulting in the lines moving to the right in the Figure. The second interference with 92.4 ms has a lower period, i.e., the resulting interference is every superframe several timeslots earlier. This pattern is  hard  to  distinguish  from  the  additional  noise  and  random  access of the real measurement.
+The first interference with the 102.4 ms period is larger compared to the 100 ms superframe duration, therefore the interference is observed in each subsequent superframe shifted to the right, resulting in the two lines moving to the right in the Figure. The second interference with 92.4 ms has a lower period, i.e., the resulting interference in every superframe several timeslots earlier. This pattern is hard to distinguish from the additional noise and random access of the real measurement.
 
 # Dataset
 
 ## Structure of Dataset
-Each subfolder in the [dataset](Dataset) folder represents one measurement set for a certain scenario. Each of these sets contains a [description.json](Dataset/test_set/description.json) with the important parameter of the measurement, the corresponding manufacturer ID of the sniffer nodes, and the timeslot they are operating. Additionally, there is a "measurement_setup" field that contains a description of the setup and peculiarity of this measurement set.
+Each subfolder in the [dataset](Dataset) folder represents one measurement set for a certain scenario. Each of these sets contains a [description.json](Dataset/artificial_periodic_interference1/description.json) with the important parameters of the measurement, the corresponding manufacturer ID of the sniffer nodes, and the timeslot they are operating. Additionally, there is a "measurement_setup" field that contains a description of the setup and peculiarity of this measurement set.
 
-The actual measurement of the sniffer nodes can be found in the [snifferX.csv](Dataset/test_set/sniffer1.csv) that contains the RSSI values of each TDMA-timeslot for each measured superframe. If for certain superframes and/or timeslots measurements are not available the specific fields are left empty.
+The actual measurement of the sniffer nodes can be found in the [snifferX.csv](Dataset/artificial_periodic_interference1/sniffer1.csv) that contains the RSSI values of each TDMA-timeslot for each measured superframe. If for certain superframes and/or timeslots measurements are not available the specific fields are left empty.
 
-## Open the Dataset
-The dataset real measurement data is provided as a CSV file which allows opening the data in various programming languages and programs. For Python we shall give a small code example to open the sniffer measurement with Pandas and convert the superframe number and the measurements itself to NumPy arrays for further evaluation:
+## Loading the Dataset
+The sniffer measurements are provided as a CSV file which allows opening the data in various programming languages and programs. For Python we shall give a small code example to open the sniffer measurement with Pandas and convert the superframe number and the measurements itself to NumPy arrays for further evaluation:
 
 
 ```python
