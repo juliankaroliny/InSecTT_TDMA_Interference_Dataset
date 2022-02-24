@@ -3,7 +3,7 @@
 
 This dataset provides interference measurements with a wireless sensor network (WSN) based on a time division multiple access (TDMA) protocol running on low-cost hardware. The WSN consists of a network coordinator and several measurement nodes, where each device is allowed to transmit at a certain timeslot. For the interference measurements, special measurement nodes are introduced, that measure the average signal level of all possible timeslots and send the data to the network coordinator. This provides a somehow continuous measurement of the signal level in the channel. Since only the average signal level is considered, the channel access of different communication protocols can be evaluated. Furthermore, if a device shows deterministic access to the channel, e.g. periodic access, certain patterns can be observed in the measurements. These patterns can be used to identify the source and apply countermeasures for the WSN.
 
-This dataset is a work from [Silicon Austria Labs GmbH](https://silicon-austria-labs.com/) (SAL) and [Johannes Keppler University](https://www.jku.at/en) (JKU) in Linz for the [InSecTT project](https://www.insectt.eu/).
+This dataset is a work from [Silicon Austria Labs GmbH](https://silicon-austria-labs.com/) (SAL) and the [Institute for Communications Engineering and RF-Systems](https://www.jku.at/en/institute-for-communications-engineering-and-rf-systems/)  (NTHFS) of the Johannes Kepler University (JKU) in Linz for the [InSecTT project](https://www.insectt.eu/).
 
 # Measurement Procedure
 
