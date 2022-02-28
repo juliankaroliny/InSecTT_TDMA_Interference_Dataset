@@ -39,7 +39,7 @@ every new superframe. The resulting pattern can be seen on the right.
 
 
 # Example Measurement
-The following figure shows one example measurement of this dataset. The x-Axis represents the timeslot number (in our case 100 timeslots per superframe) and the y-Axis represents the superframes, i.e. the subsequent measurements (100 ms superframe duration). If in a timeslot the measured signal level is above a −90 dBm threshold, it is marked black, otherwise, it is left empty.  In the dataset also the corresponding RSSI values are available, though not depicted here for easier understanding. 
+The following figure shows one example measurement of this dataset. The x-Axis represents the timeslot number (in our case 100 timeslots per superframe) and the y-Axis represents the superframes, i.e. the subsequent measurements (100 ms superframe duration). If in a timeslot the measured signal level is above a −90 dBm threshold, it is marked black, otherwise, it is left empty.  In the dataset also the corresponding RSSI values are available, though not depicted here for simplicity. 
 
 In this measurement, two interferers are placed nearby which transmit at a period of 102.4 ms and 92.4 ms, respectively. The following figure depicts the measurement,  showing the interference of the timeslots over 100 superframes.
 
@@ -47,12 +47,12 @@ In this measurement, two interferers are placed nearby which transmit at a perio
 <img src="Images/example_meas_raw.png" height="70%" width="70%" >
 </p>
 
-The first interference with the 102.4 ms period is larger compared to the 100 ms superframe duration, therefore the interference is observed in each subsequent superframe shifted to the right, resulting in the two lines moving to the right in the Figure. The second interference with 92.4 ms has a lower period, i.e., the resulting interference in every superframe several timeslots earlier. This pattern is hard to distinguish from the additional noise and random access of the real measurement.
+The first interference with the 102.4 ms period is larger compared to the 100 ms superframe duration, therefore the interference is observed in each subsequent superframe shifted to the right, resulting in the two lines moving to the right in the figure. The second interference with 92.4 ms has a lower period, i.e., the resulting interference appears several timeslots earlier in every new superframe. This pattern is hard to distinguish from the additional noise and random access of the real measurement.
 
 # Dataset
 
 ## Structure of Dataset
-Each subfolder in the [dataset](Dataset) folder represents one measurement set for a certain scenario. Each of these sets contains a [description.json](Dataset/artificial_periodic_interference1/description.json) with the important parameters of the measurement, the corresponding manufacturer ID of the sniffer nodes, and the timeslot they are operating. Additionally, there is a "measurement_setup" field that contains a description of the setup and peculiarity of this measurement set.
+Each subfolder in the [dataset](Dataset) folder represents one measurement set for a certain scenario. Each of these sets contain a [description.json](Dataset/artificial_periodic_interference1/description.json) with the important parameters of the measurement, the corresponding manufacturer ID of the sniffer nodes, and the timeslot they are operating. Additionally, there is a "measurement_setup" field that contains a description of the setup and peculiarity of this measurement set.
 
 The actual measurement of the sniffer nodes can be found in the [snifferX.csv](Dataset/artificial_periodic_interference1/sniffer1.csv) that contains the RSSI values of each TDMA-timeslot for each measured superframe. If for certain superframes and/or timeslots measurements are not available the specific fields are left empty.
 
